@@ -1,0 +1,22 @@
+{
+  "name": "pdi",
+  "authors": [
+    "Allan Gonçalves da Cruz <allangcruz@gmail.com>"
+  ],
+  "description": "Tabalho de Processamento de Imagem",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "highcharts": "^5.0.10",
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7"
+  }
+}
