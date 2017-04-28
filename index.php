@@ -27,6 +27,22 @@
       </section>
     </main>
 
+    <div class="modal fade" id="modal-error">
+      <div class="modal-dialog" styel="width: 90%;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">Error:</h4>
+          </div>
+          <div class="modal-body row">
+            <div class="col-lg-12">
+              <div id="msg-error"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="assets/components/jquery/dist/jquery.min.js"></script>
     <script src="assets/components/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -27,7 +27,7 @@ class Histograma
      *
      * @return array
      */
-    public function getHistograma($imagem = '')
+    public function getHistogramaImagick($imagem = '')
     {
         if (! empty($image)) {
             $this->imagem = $image;
@@ -50,25 +50,74 @@ class Histograma
     }
 
     /**
+     * Retorna os valores do histograma da imagem informada
+     *
+     * @return array
+     */
+    public function getHistograma($imagem = '')
+    {
+        if (! empty($image)) {
+            $this->imagem = $image;
+        }
+
+        //$im = ImageCreateFromJpeg($this->imagem);
+        $im = ImageCreateFromPng($this->imagem);
+
+        $imgw = imagesx($im);
+        $imgh = imagesy($im);
+
+        // n = total number or pixels
+        $n = $imgw * $imgh;
+
+        $histo = array();
+        $item = new stdClass();
+
+        for ($i=0; $i < $imgw; $i++) {
+            for ($j=0; $j < $imgh; $j++) {
+                // get the rgb value for current pixel
+                $rgb = ImageColorAt($im, $i, $j);
+
+                // extract each value for r, g, b
+                $r = ($rgb >> 16) & 0xFF;
+                $g = ($rgb >> 8) & 0xFF;
+                $b = $rgb & 0xFF;
+
+                // get the Value from the RGB value
+                $V = round(($r + $g + $b) / 3);
+
+                // add the point to the histogram
+                $histo[$V] += $V / $n;
+            }
+        }
+
+        // find the maximum in the histogram in order to display a normated graph
+        $max = 0;
+        for ($i=0; $i<255; $i++) {
+            if ($histo[$i] > $max) {
+                $max = $histo[$i];
+            }
+        }
+
+        foreach ($histo as $key => $value) {
+            $item->x[] = $key;
+            $item->y[] = $value;
+        }
+
+        return $item;
+    }
+
+    /**
      * Retorna os valores formatados para colocar no Grafico
      *
      * @return array
      */
     public function getValoresIndicador()
     {
-        $canais = ['Vermelhor', 'Verde', 'Azul', 'Alpha'];
-        $canais = $this->getHistograma();
-        $histogramas = [];
+        $histograma = new stdClass();
+        $histograma->name = 'Tons de Cinza';
+        $histograma->data = $this->getHistograma();
 
-        foreach ($canais as $index => $canal) {
-            $item = new stdClass();
-            $item->name = $this->getNomeCanal($index);
-            $item->data = $canal;
-
-            $histogramas[] = $item;
-        }
-
-        return $histogramas;
+        return $histograma;
     }
 
     /**
