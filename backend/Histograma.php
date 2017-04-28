@@ -60,8 +60,8 @@ class Histograma
             $this->imagem = $image;
         }
 
-        //$im = ImageCreateFromJpeg($this->imagem);
-        $im = ImageCreateFromPng($this->imagem);
+        $im = ImageCreateFromJpeg($this->imagem);
+        // $im = ImageCreateFromPng($this->imagem);
 
         $imgw = imagesx($im);
         $imgh = imagesy($im);
@@ -90,13 +90,13 @@ class Histograma
             }
         }
 
-        // find the maximum in the histogram in order to display a normated graph
-        $max = 0;
-        for ($i=0; $i<255; $i++) {
-            if ($histo[$i] > $max) {
-                $max = $histo[$i];
-            }
-        }
+        ksort($histo);
+        /*
+        echo '<pre>';
+        print_r($histo);
+        echo '<hr>';
+        print_r($histo);
+        */
 
         foreach ($histo as $key => $value) {
             $item->x[] = $key;

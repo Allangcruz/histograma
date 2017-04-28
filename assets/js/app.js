@@ -28,7 +28,7 @@ var histograma = (function(){
 	 * Gera a indicador
 	 */
 	var gerarIndicador = function(valores) {
-		console.log(valores.data.x);
+		console.log(valores);
 		Highcharts.chart('indicador', {
 		    chart: { type: 'area' },
 		    title: { text: 'HISTOGRAMA - PROCESSAMENTO DIGITAL DE IMAGEM' },

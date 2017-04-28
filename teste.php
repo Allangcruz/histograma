@@ -6,7 +6,7 @@ $source_file = "assets/imgs/003.jpg";
 
 // histogram options
 $maxheight = 300;
-$barwidth = 5;
+$barwidth = 2;
 
 $im = ImageCreateFromJpeg($source_file);
 //$im = ImageCreateFromPng($source_file);
@@ -58,7 +58,6 @@ for ($i=0; $i<255; $i++) {
     $h = ($histo[$i]/$max)*$maxheight;
     echo '<img src="img.gif" width="'.$barwidth.'" height="'.$h.'" border="0">';
 }
-*/
 
 echo '<pre>';
 print_r('largura: '.$imgw);
@@ -75,6 +74,7 @@ echo '<br>';
 print_r($itens);
 
 die();
+*/
 
 echo "<div style='width: ".(256*$barwidth)."px; border: 1px solid'>";
 for ($i=0; $i<255; $i++) {
