@@ -1,6 +1,5 @@
 <?php
 
-require_once('Histograma.php');
 require_once('Filtro.php');
 
 error_reporting(E_ALL ^ E_NOTICE);

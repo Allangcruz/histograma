@@ -1,5 +1,7 @@
 <?php
 
+require_once('Histograma.php');
+
 class Filtro
 {
 
@@ -62,14 +64,21 @@ class Filtro
     {
         $this->lerImagem($dados->arquivo);
 
-        if (! empty($dados->mascara['media'])) {
-            $this->media($dados->mascara['media']);
+        foreach ($dados->filtros as $filtro) {
+            if ($filtro == self::MEDIA && ! empty($dados->mascara['media'])) {
+                $this->media($dados->mascara['media']);
+            }
+
+            if ($filtro == self::MEDIANA && ! empty($dados->mascara['mediana'])) {
+                $this->mediana($dados->mascara['mediana']);
+            }
         }
 
-        if (! empty($dados->mascara['mediana'])) {
-            $this->mediana($dados->mascara['mediana']);
-        }
-
+        /*
+        $histograma = new Histograma();
+        $histograma->setImagem($dados->arquivo['tmp_name']);
+        $dados = $histograma->getValoresIndicador();
+        */
         return 'data:image/png;base64,'.base64_encode($this->imagem->getImageBlob());
     }
 

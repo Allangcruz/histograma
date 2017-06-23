@@ -13,26 +13,12 @@ class Histograma
     }
 
     /**
-     * Retorna o valor do nome da imagem.
-     *
-     * @return string
-     */
-    public function getImagem()
-    {
-        return $this->imagem;
-    }
-
-    /**
      * Retorna os valores do histograma da imagem informada
      *
      * @return array
      */
     public function getHistogramaImagick($imagem = '')
     {
-        if (! empty($image)) {
-            $this->imagem = $image;
-        }
-
         $image = new Imagick($this->imagem);
         $pixels = $image->getImageHistogram();
 
@@ -40,28 +26,45 @@ class Histograma
 
         foreach ($pixels as $pixel) {
             $colors = $pixel->getColor();
-            //$total = [$pixel->getColorCount()];
             foreach($colors as $index => $color){
                 $histPixeis[$index][] = $color;
-                //$histPixeis[$index] = $total;
             }
         }
         return $histPixeis;
     }
 
     /**
-     * Retorna os valores do histograma da imagem informada
+     * Cria imagem conforme extenção do arquivo.
      *
-     * @return array
+     * @param $dados
+     * @return imagem
      */
-    public function getHistograma($imagem = '')
+    private function criaImagemPorExtensao($dados)
     {
-        if (! empty($image)) {
-            $this->imagem = $image;
+        if () {
+
         }
 
-        $imagem = ImageCreateFromJpeg($this->imagem);
-        // $imagem = ImageCreateFromPng($this->imagem);
+        if () {
+
+        }
+
+        if () {
+
+        }
+
+        return $imagem;
+    }
+
+    /**
+     * Retorna os valores do histograma da imagem informada
+     *
+     * @param $dados
+     * @return array
+     */
+    public function getHistograma($dados)
+    {
+        $imagem = $this->criaImagemPorExtensao($dados);
 
         $imgw = imagesx($imagem);
         $imgh = imagesy($imagem);
@@ -112,18 +115,5 @@ class Histograma
         $histograma->data = $this->getHistograma();
 
         return $histograma;
-    }
-
-    /**
-     * Retorna o nome do canal conforme $valor informado
-     *
-     * @param $valor
-     * @return string
-     */
-    private function getNomeCanal($valor)
-    {
-        $canais = ['r' => 'Vermelhor', 'g' => 'Verde', 'b' => 'Azul', 'a' => 'Alpha'];
-
-        return $canais[$valor];
     }
 }
