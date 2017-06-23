@@ -60,11 +60,11 @@ class Histograma
             $this->imagem = $image;
         }
 
-        $im = ImageCreateFromJpeg($this->imagem);
-        // $im = ImageCreateFromPng($this->imagem);
+        $imagem = ImageCreateFromJpeg($this->imagem);
+        // $imagem = ImageCreateFromPng($this->imagem);
 
-        $imgw = imagesx($im);
-        $imgh = imagesy($im);
+        $imgw = imagesx($imagem);
+        $imgh = imagesy($imagem);
 
         // n = total number or pixels
         $n = $imgw * $imgh;
@@ -75,7 +75,7 @@ class Histograma
         for ($i=0; $i < $imgw; $i++) {
             for ($j=0; $j < $imgh; $j++) {
                 // get the rgb value for current pixel
-                $rgb = ImageColorAt($im, $i, $j);
+                $rgb = ImageColorAt($imagem, $i, $j);
 
                 // extract each value for r, g, b
                 $r = ($rgb >> 16) & 0xFF;
@@ -83,20 +83,14 @@ class Histograma
                 $b = $rgb & 0xFF;
 
                 // get the Value from the RGB value
-                $V = round(($r + $g + $b) / 3);
+                $valor = round(($r + $g + $b) / 3);
 
                 // add the point to the histogram
-                $histo[$V] += $V / $n;
+                $histo[$valor] += $valor / $n;
             }
         }
 
         ksort($histo);
-        /*
-        echo '<pre>';
-        print_r($histo);
-        echo '<hr>';
-        print_r($histo);
-        */
 
         foreach ($histo as $key => $value) {
             $item->x[] = $key;

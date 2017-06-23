@@ -21,6 +21,77 @@
     <main class="container">
       <section class="row">
         <div class="col-md-12">
+          <h1>APLICAÇÃO DE FILTROS DE MEDIA E MEDIANA</h1>
+          <form class="form-horizontal">
+
+            <legend>IMAGEM</legend>
+            <div class="row col-md-12 form-group">
+              <input type="file" id="imagem" name="imagem" onchange="histograma.readURL(this, '#original-imagem');" accept="image/x-png, image/gif, image/jpeg, image/jpg" >
+            </div>
+
+            <legend>FILTROS</legend>
+            <label class="checkbox-inline">
+              <input type="checkbox" id="media" value="1" name="filtros[]"> MÉDIA
+            </label>
+            <label class="checkbox-inline">
+              <input type="checkbox" id="mediana" value="2" name="filtros[]"> MEDIANA
+            </label>
+            <br><br>
+
+            <div class="row col-md-6">
+              <legend>MASCARAS MEDIA</legend>
+              <label class="radio-inline">
+                <input type="radio" name="mascara[media]" value="1"> 3x3
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="mascara[media]" value="2"> 5x5
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="mascara[media]" value="3"> 9x9
+              </label>
+            </div>
+
+            <div class="row col-md-6">
+              <legend>MASCARAS MEDIANA</legend>
+              <label class="radio-inline">
+                <input type="radio" name="mascara[mediana]" value="1"> 3x3
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="mascara[mediana]" value="2"> 5x5
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="mascara[mediana]" value="3"> 9x9
+              </label>
+            </div>
+
+            <div class="row col-md-12">
+              <br><br>
+              <button class="btn btn-lg btn-primary">PROCESSAR</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="row">
+        <div class="col-md-12">
+          <h2>RESULTADOS</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Imagem Original</h4>
+              <img src="" alt="Imagem Original" class="img-thumbnail" id="original-imagem">
+            </div>
+
+            <div class="col-md-6">
+              <h4>Imagem com Filtro</h4>
+              <img src="" alt="Imagem Com Filtro" class="img-thumbnail" id="filtro-imagem">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+      <section class="row">
+        <div class="col-md-12">
           <br><br>
           <div id="indicador" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         </div>
@@ -46,7 +117,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="assets/components/jquery/dist/jquery.min.js"></script>
     <script src="assets/components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/components/highcharts/highcharts.js"></script>
+    <script src="assets/components/highcharts/highcharts.js?v=<?php echo time(); ?>>"></script>
     <script src="assets/js/app.js"></script>
   </body>
 </html>
