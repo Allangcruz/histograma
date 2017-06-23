@@ -66,7 +66,8 @@
 
             <div class="row col-md-12">
               <br><br>
-              <button type="button" class="btn btn-lg btn-primary" onclick="histograma.aplicarFiltro(formFiltro);">PROCESSAR</button>
+              <button type="button" class="btn btn-lg btn-primary btn-disabled" onclick="histograma.aplicarFiltro(formFiltro);">PROCESSAR</button>
+              <i class="loading hide"><img src="assets/imgs/load.gif" alt="Carregando..."></i>
             </div>
           </form>
         </div>
@@ -94,6 +95,14 @@
         <div class="col-md-12">
           <br><br>
           <div id="indicador" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+      </section>
+
+      <hr>
+      <section class="row">
+        <div class="col-md-12">
+          <br><br>
+          <div id="indicador-filtrado" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         </div>
       </section>
     </main>

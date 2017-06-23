@@ -34,7 +34,36 @@ var histograma = (function(){
 		console.log(valores);
 		Highcharts.chart('indicador', {
 		    chart: { type: 'area' },
-		    title: { text: 'HISTOGRAMA - PROCESSAMENTO DIGITAL DE IMAGEM' },
+		    title: { text: 'HISTOGRAMA - IMAGEM ORIGINAL' },
+		    xAxis: {
+		        categories: valores.data.x,
+		        tickmarkPlacement: 'on',
+		        title: { enabled: true, text: 'Quantidade de Preto' }
+		    },
+		    yAxis: { title: { text: 'Quantidade de Branco' }, },
+		    plotOptions: {
+		        area: {
+		            stacking: 'normal',
+		            lineColor: '#666666',
+		            lineWidth: 1,
+		            marker: {
+		                lineWidth: 1,
+		                lineColor: '#666666'
+		            }
+		        }
+		    },
+		    series: [{ name: 'Quantidade de Branco', data: valores.data.y, }]
+		});
+	}
+
+	/**
+	 * Gera a indicador
+	 */
+	var gerarIndicadorFiltrado = function(valores) {
+		console.log(valores);
+		Highcharts.chart('indicador-filtrado', {
+		    chart: { type: 'area' },
+		    title: { text: 'HISTOGRAMA - IMAGEM FILTRADA' },
 		    xAxis: {
 		        categories: valores.data.x,
 		        tickmarkPlacement: 'on',
@@ -97,6 +126,9 @@ var histograma = (function(){
 	 * Aplica filtro de mascara.
 	 */
 	var aplicarFiltro = function(form) {
+		$('.btn-disabled').attr({'disabled':'enabled'});
+		$('.loading').removeClass('hide');
+
 		var url = $(form).attr("action");
         var dados = new FormData($(form)[0]);
 		dados.append('acao', 'filtrar');
@@ -110,13 +142,19 @@ var histograma = (function(){
             contentType : false,
             processData : false,
             success: function(response) {
-				$('#filtro-imagem').attr('src', response.data);
+				$('#filtro-imagem').attr('src', response.data.filtro);
 				showDivImage('#filtro-imagem');
 				console.log(response);
+				gerarIndicador(response.data.histograma_original);
+				gerarIndicadorFiltrado(response.data.histograma_filtrado);
+				$('.btn-disabled').removeAttr('disabled');
+				$('.loading').addClass('hide');
 			},
 			error: function(response) {
 				$("#msg-error").html(response.responseText);
 	    		$("#modal-error").modal("show");
+				$('.btn-disabled').removeAttr('disabled');
+				$('.loading').addClass('hide');
 			}
         });
 	}

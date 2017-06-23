@@ -74,12 +74,15 @@ class Filtro
             }
         }
 
-        /*
+        $imagemFiltro = $this->imagem->getImageBlob();
+        $this->imagem->writeImage('../assets/imgs/imagem-filtrada.png');
         $histograma = new Histograma();
-        $histograma->setImagem($dados->arquivo['tmp_name']);
-        $dados = $histograma->getValoresIndicador();
-        */
-        return 'data:image/png;base64,'.base64_encode($this->imagem->getImageBlob());
+
+        return [
+            "filtro" => 'data:image/png;base64,'.base64_encode($imagemFiltro),
+            "histograma_original" => $histograma->getValoresIndicador($dados),
+            "histograma_filtrado" => $histograma->getValoresIndicadorFiltrado()
+        ];
     }
 
     /**
