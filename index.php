@@ -22,7 +22,7 @@
       <section class="row">
         <div class="col-md-12">
           <h1>APLICAÇÃO DE FILTROS DE MEDIA E MEDIANA</h1>
-          <form class="form-horizontal">
+          <form class="form-horizontal" id="formFiltro" name="formFiltro" action="backend/Main.php">
 
             <legend>IMAGEM</legend>
             <div class="row col-md-12 form-group">
@@ -41,32 +41,32 @@
             <div class="row col-md-6">
               <legend>MASCARAS MEDIA</legend>
               <label class="radio-inline">
-                <input type="radio" name="mascara[media]" value="1"> 3x3
+                <input type="radio" name="mascara[media]" value="3"> 3x3
               </label>
               <label class="radio-inline">
-                <input type="radio" name="mascara[media]" value="2"> 5x5
+                <input type="radio" name="mascara[media]" value="5"> 5x5
               </label>
               <label class="radio-inline">
-                <input type="radio" name="mascara[media]" value="3"> 9x9
+                <input type="radio" name="mascara[media]" value="9"> 9x9
               </label>
             </div>
 
             <div class="row col-md-6">
               <legend>MASCARAS MEDIANA</legend>
               <label class="radio-inline">
-                <input type="radio" name="mascara[mediana]" value="1"> 3x3
+                <input type="radio" name="mascara[mediana]" value="3"> 3x3
               </label>
               <label class="radio-inline">
-                <input type="radio" name="mascara[mediana]" value="2"> 5x5
+                <input type="radio" name="mascara[mediana]" value="5"> 5x5
               </label>
               <label class="radio-inline">
-                <input type="radio" name="mascara[mediana]" value="3"> 9x9
+                <input type="radio" name="mascara[mediana]" value="9"> 9x9
               </label>
             </div>
 
             <div class="row col-md-12">
               <br><br>
-              <button class="btn btn-lg btn-primary">PROCESSAR</button>
+              <button type="button" class="btn btn-lg btn-primary" onclick="histograma.aplicarFiltro(formFiltro);">PROCESSAR</button>
             </div>
           </form>
         </div>

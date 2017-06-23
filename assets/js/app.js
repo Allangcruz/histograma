@@ -4,6 +4,8 @@ var histograma = (function(){
 	 */
 	var iniciar = function() {
 		//getValoresHistograma();
+		showDivImage('#original-imagem');
+		showDivImage('#filtro-imagem');
 	}
 
 	/**
@@ -14,6 +16,7 @@ var histograma = (function(){
 			type: 'get',
 			url: 'backend/Main.php',
 			dataType: 'json',
+			data: {'acao': 'histograma'},
 			success: function(response) {
 				gerarIndicador(response.data);
 			},
@@ -91,11 +94,40 @@ var histograma = (function(){
     }
 
 	/**
+	 * Aplica filtro de mascara.
+	 */
+	var aplicarFiltro = function(form) {
+		var url = $(form).attr("action");
+        var dados = new FormData($(form)[0]);
+		dados.append('acao', 'filtrar');
+
+        $.ajax({
+            type: 'post',
+            url: url,
+            data : dados,
+            enctype: 'multipart/form-data',
+            dataType: 'json',
+            contentType : false,
+            processData : false,
+            success: function(response) {
+				$('#filtro-imagem').attr('src', response.data);
+				showDivImage('#filtro-imagem');
+				console.log(response);
+			},
+			error: function(response) {
+				$("#msg-error").html(response.responseText);
+	    		$("#modal-error").modal("show");
+			}
+        });
+	}
+
+	/**
 	 * Retorna api publica.
 	 */
 	return {
 		iniciar : iniciar,
 		readURL : readURL,
+		aplicarFiltro : aplicarFiltro,
 		gerarIndicador : gerarIndicador
 	}
 })();
